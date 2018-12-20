@@ -1,6 +1,18 @@
 # \<hero-list\>
 
-list of marvel heroes
+list of marvel heroes that recieves an array and makes the display of each heroe, its supposed to change the color once you kill them but i have not been able to do that yet
+
+## Install the bower package manager
+
+ ```
+$ npm install -g bower
+```
+
+## Run the bower install
+
+```
+bower install
+```
 
 ## Install the Polymer-CLI
 
