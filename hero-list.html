@@ -5,59 +5,95 @@
 
 
 <dom-module id="hero-list">
-  <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <dom-repeat items="[[heroList]]" as="hero">
-      <template>
-          <paper-card>
-             <div class="card-content">
-                <h3>[[hero.name]]</h3>
-             </div>
-             <div class="card-actions">
-                <paper-button>More info</paper-button>
-             </div>
-          </paper-card>
-      </template>
-    </dom-repeat>
-    
-  </template>
+    <template>
+        <style>
+            paper-card {
+                --paper-card-header-image: {
+                    width: 400px;
+                    height: 200px;
+                }
+            }
 
-  <script>
-    /**
-     * `hero-list`
-     * list of marvel heroes
-     *
-     * @customElement
-     * @polymer
-     * @demo demo/index.html
-     */
-    class HeroList extends Polymer.Element {
-      static get is() { return 'hero-list'; }
-      static get properties() {
-        return {
-           heroList:{
-             type:Array,
-             value:[]
-           },
-           isHeroDead:{
-             type:Boolean,
-             computed:"_isHeroDead(heroList)"
-           }
-        };
-      }
+            .good {
+                --paper-card-background-color: green;
 
-      _isHeroDead(heroes){
-         
-      }
-      
+            }
+
+            .bad {
+                --paper-card-background-color: red;
+            }
+
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+
+            .card {
+                display: block;
+                margin: 1rem .25em;
+                width: 15rem;
+                min-width: 30%;
+                max-width: 100%;
+            }
 
 
-    }
+        </style>
+        <div class="container">
+            <dom-repeat items="[[list]]" as="hero">
+                <template>
+                    <paper-card image="[[hero.imageUrl]]" class$="card">
+                        <div class="card-content">
+                            <h3>[[hero.name]]</h3>
+                            <h5>[[hero.mail]]</h5>
+                            <h5>[[hero.phone]]</h5>
+                            <paper-button on-tap="_displayInfo">More Info</paper-button>
+                        </div>
+                    </paper-card>
+                </template>
+            </dom-repeat>
+        </div>
 
-    window.customElements.define(HeroList.is, HeroList);
-  </script>
+
+    </template>
+
+    <script>
+        /**
+         * `hero-list`
+         * list of marvel heroes
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class HeroList extends Polymer.Element {
+            static get is() {
+                return 'hero-list';
+            }
+
+            static get properties() {
+                return {
+                    list: {
+                        type: Array,
+                        value: []
+                    }
+                };
+            }
+
+
+            _displayInfo(event) {
+                // heroList[index].property
+                this.set(['list', event.model.index, 'health'], 'bad');
+                this.dispatchEvent(new CustomEvent("show-heroe", {
+                    bubbles: false,//////sigue propagacion hacia arriba si esta en true
+                    composed: false,
+                    detail: event.model.hero
+                }))
+            }
+
+           
+        }
+
+        window.customElements.define(HeroList.is, HeroList);
+    </script>
 </dom-module>
