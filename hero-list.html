@@ -5,100 +5,91 @@
 
 
 <dom-module id="hero-list">
-  <template>
-    <style>
-      paper-card {
-        --paper-card-header-image: {
-          width: 400px;
-          height: 200px;
+    <template>
+        <style>
+            paper-card {
+                --paper-card-header-image: {
+                    width: 400px;
+                    height: 200px;
+                }
+            }
+
+            .good {
+                --paper-card-background-color: green;
+
+            }
+
+            .bad {
+                --paper-card-background-color: red;
+            }
+
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+
+            .card {
+                display: block;
+                margin: 1rem .25em;
+                width: 15rem;
+                min-width: 30%;
+                max-width: 100%;
+            }
+
+
+        </style>
+        <div class="container">
+            <dom-repeat items="[[heroList]]" as="hero">
+                <template>
+                    <paper-card image="[[hero.url]]" class$="card [[hero.health]]">
+                        <div class="card-content">
+                            <h3>[[hero.name]]</h3>
+                            <paper-button on-tap="_displayInfo">Kill him</paper-button>
+                        </div>
+                    </paper-card>
+                </template>
+            </dom-repeat>
+        </div>
+
+
+    </template>
+
+    <script>
+        /**
+         * `hero-list`
+         * list of marvel heroes
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class HeroList extends Polymer.Element {
+            static get is() {
+                return 'hero-list';
+            }
+
+            static get properties() {
+                return {
+                    heroList: {
+                        type: Array,
+                        value: []
+                    }
+                };
+            }
+
+
+            _displayInfo(event) {
+                // heroList[index].property
+                this.set(['heroList', event.model.index, 'health'], 'bad');
+                this.dispatchEvent(new CustomEvent("show-heroe", {
+                    bubbles: false,//////sigue propagacion hacia arriba
+                    composed: false,
+                    detail: event.model.hero
+                }))
+            }
         }
-      }
-      .good{
-        --paper-card-background-color:green;
-   
-      }
-      .bad{
-        --paper-card-background-color:red;
-      }
-      .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-      }
-      /*paper-card{
-        display: flex;
-        flex-wrap: wrap;
-   justify-content: space-between;
-      }*/
 
-      .card {
-        /*flex: 1 0 500px;*/
-    /*box-sizing: border-box;*/
-    display: block;
-    margin: 1rem .25em;
-    width: 15rem;
-    min-width: 30%;
-    max-width: 100%;
-      }
-
-    
-    </style>
-    <div class="container">
-      <dom-repeat items="[[heroList]]" as="hero">
-        <template>
-            <paper-card image="[[hero.url]]" class$="card [[hero.health]]">
-               <div class="card-content">
-                  <h3>[[hero.name]]</h3>
-                  <paper-button on-tap="_displayInfo">Kill him</paper-button>
-               </div>
-            </paper-card>
-        </template>
-      </dom-repeat>
-    </div>
-    
-    
-  </template>
-
-  <script>
-    /**
-     * `hero-list`
-     * list of marvel heroes
-     *
-     * @customElement
-     * @polymer
-     * @demo demo/index.html
-     */
-    class HeroList extends Polymer.Element {
-      static get is() { return 'hero-list'; }
-      static get properties() {
-        return {
-           heroList:{
-             type:Array,
-             value:[],
-             observer:"_changedColor"
-           }
-        };
-      }
-
-    
-
-      _displayInfo(event){
-        this.dispatchEvent(new CustomEvent("show-heroe",{
-          bubbles:false,//////sigue propagacion hacia arriba
-          composed:false,
-          detail:event.model.hero
-        }))
-      }
-
-      _changedColor(heroes){
-        
-      }
-
-      
-
-
-    }
-
-    window.customElements.define(HeroList.is, HeroList);
-  </script>
+        window.customElements.define(HeroList.is, HeroList);
+    </script>
 </dom-module>
