@@ -7,22 +7,55 @@
 <dom-module id="hero-list">
   <template>
     <style>
-      :host {
-        display: block;
+      paper-card {
+        --paper-card-header-image: {
+          width: 400px;
+          height: 200px;
+        }
       }
+      .good{
+        --paper-card-background-color:green;
+   
+      }
+      .bad{
+        --paper-card-background-color:red;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+      /*paper-card{
+        display: flex;
+        flex-wrap: wrap;
+   justify-content: space-between;
+      }*/
+
+      .card {
+        /*flex: 1 0 500px;*/
+    /*box-sizing: border-box;*/
+    display: block;
+    margin: 1rem .25em;
+    width: 15rem;
+    min-width: 30%;
+    max-width: 100%;
+      }
+
+    
     </style>
-    <dom-repeat items="[[heroList]]" as="hero">
-      <template>
-          <paper-card>
-             <div class="card-content">
-                <h3>[[hero.name]]</h3>
-             </div>
-             <div class="card-actions">
-                <paper-button>More info</paper-button>
-             </div>
-          </paper-card>
-      </template>
-    </dom-repeat>
+    <div class="container">
+      <dom-repeat items="[[heroList]]" as="hero">
+        <template>
+            <paper-card image="[[hero.url]]" class$="card [[hero.health]]">
+               <div class="card-content">
+                  <h3>[[hero.name]]</h3>
+                  <paper-button on-tap="_displayInfo">Kill him</paper-button>
+               </div>
+            </paper-card>
+        </template>
+      </dom-repeat>
+    </div>
+    
     
   </template>
 
@@ -41,18 +74,26 @@
         return {
            heroList:{
              type:Array,
-             value:[]
-           },
-           isHeroDead:{
-             type:Boolean,
-             computed:"_isHeroDead(heroList)"
+             value:[],
+             observer:"_changedColor"
            }
         };
       }
 
-      _isHeroDead(heroes){
-         
+    
+
+      _displayInfo(event){
+        this.dispatchEvent(new CustomEvent("show-heroe",{
+          bubbles:false,//////sigue propagacion hacia arriba
+          composed:false,
+          detail:event.model.hero
+        }))
       }
+
+      _changedColor(heroes){
+        console.log(heroes);
+      }
+
       
 
 
