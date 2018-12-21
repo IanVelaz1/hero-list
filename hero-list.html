@@ -83,6 +83,7 @@
     
 
       _displayInfo(event){
+        
         this.dispatchEvent(new CustomEvent("show-heroe",{
           bubbles:false,//////sigue propagacion hacia arriba
           composed:false,
@@ -90,9 +91,7 @@
         }))
       }
 
-      _changedColor(heroes){
-        
-      }
+     
 
       
 
