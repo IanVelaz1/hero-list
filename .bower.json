@@ -1,0 +1,29 @@
+{
+  "name": "hero-list",
+  "description": "list of marvel heroes",
+  "main": "hero-list.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-card": "PolymerElements/paper-card#2.1.0",
+    "paper-button": "PolymerElements/paper-button#2.1.3",
+    "notification-toast": "jifalops/notification-toast#^0.2.0"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  },
+  "homepage": "https://github.com/jusolete/hero-list-v2",
+  "_release": "5bb06d3bc1",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "5bb06d3bc1e3e79f95cccc29082cb2060fac805e"
+  },
+  "_source": "https://github.com/jusolete/hero-list-v2.git",
+  "_target": "*",
+  "_originalSource": "jusolete/hero-list-v2"
+}
