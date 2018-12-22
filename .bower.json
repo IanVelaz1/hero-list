@@ -16,14 +16,14 @@
   "resolutions": {
     "polymer": "^2.0.0"
   },
-  "homepage": "https://github.com/jusolete/hero-list-v2",
-  "_release": "5bb06d3bc1",
+  "homepage": "https://github.com/jusolete/hero-list",
+  "_release": "f6ff55bc1c",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "5bb06d3bc1e3e79f95cccc29082cb2060fac805e"
+    "commit": "f6ff55bc1c240cf4ba4f9765c308fbfe464547aa"
   },
-  "_source": "https://github.com/jusolete/hero-list-v2.git",
+  "_source": "https://github.com/jusolete/hero-list.git",
   "_target": "*",
-  "_originalSource": "jusolete/hero-list-v2"
+  "_originalSource": "jusolete/hero-list"
 }
